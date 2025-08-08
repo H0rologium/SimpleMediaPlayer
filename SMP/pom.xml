@@ -6,7 +6,7 @@
 
     <groupId>org.horo.simplemedia</groupId>
     <artifactId>simple-media-player</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
     <name>SMP</name>
 
     <properties>
@@ -27,6 +27,11 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
             <version>${javafx.version}</version>
         </dependency>
     </dependencies>

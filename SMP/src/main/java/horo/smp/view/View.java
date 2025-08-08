@@ -1,5 +1,7 @@
 package horo.smp.view;
 import horo.smp.config.Log;
+import horo.smp.controller.PlayerController;
+import horo.smp.controller.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +21,9 @@ public abstract class View extends Application {
     public void setWindowIcon(String resourceName) {
         this.icon = new Image("/"+resourceName+".png");
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public static void launchApp() {
         launch();
@@ -28,9 +33,9 @@ public abstract class View extends Application {
     public void start(Stage primaryStage) throws Exception
     {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/"+this.resourceName));
-
-            Scene scene = new Scene(root, 400, 300); // optional size
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/"+this.resourceName));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
             primaryStage.setTitle(this.title);
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);

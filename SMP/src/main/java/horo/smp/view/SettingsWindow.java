@@ -1,5 +1,4 @@
 package horo.smp.view;
-import horo.smp.config.Log;
 
 public class SettingsWindow extends View
 {
@@ -9,6 +8,7 @@ public class SettingsWindow extends View
     {
         this.setResourceName("fxml_settings.fxml");
         this.setWindowIcon("icon");
+        this.setTitle(title);
     }
 
 }
