@@ -1,9 +1,9 @@
 # SimpleMediaPlayer
-A simple media player. Thats it. Plays videos or displays images.
+A simple media player for windows. Thats it. Plays videos or displays images.
 
-This is a lightweight media program written in java 24. The purpose is mainly to help my understanding of java/javafx as well as making a, well, simple media player. I'm not necessarily trying to market this as anything better than standards such as VLC or MPC-HC, as this is more of a hobby project than anything else. I just wanted a very simple way to view media, without any fancy settings or telemetry tacked on.
+This is a lightweight media program written in java 24. The purpose is mainly to help my understanding of javafx/javafxml design as well as making a, well, simple media player. This is more of a hobby project than anything else. I just wanted a very simple way to view media, without any fancy settings or telemetry tacked on.
 
-Should run fine on both windows and major linux distros, feel free to report any issues. 
+Should run fine on both windows 10 and 11. I only own windows 10 computers at the moment so feel free to report any win11 issues. 
 
 ### What it does/does not
 
@@ -22,7 +22,8 @@ This program does not:
 - Playback videos at varying speeds
 - Save timestamps or continuation points when viewing video
 
-
 ### Usage
 
-You can find a latest release from the releases page to fit your needs. 
+You can find a latest release for the installer from the releases page to fit your needs. Its an offline installer and will install the program under Program Files.
+
+Originally there was going to be logic for modifying the registry so you would be able to easily assign this program as the default program for common media filetypes. Unfortunately with how undocumented this is for a javafx program bundled using jpackage it was at best a risky implementation (plus I would like to avoid something going wrong and breaking the registry since this is just a hobby project). You can still set this as the default by right clicking a file with a desired extension and going to Open With -> Choose Another App (Win10) and browsing to the executable of this program to do so, and letting windows handle it from there.

@@ -22,7 +22,10 @@ public class Config {
         switch (configName)
         {
             case "oneInstance":
-                this.oneInstance = val;
+                this.oneInstance = (boolean)val;
+                return;
+            default:
+                Log.Error(this,"Invalid config tag %s passed, this is not valid!".formatted(configName));
         }
         return;
     }
