@@ -6,7 +6,7 @@ public class Config {
 
     public Config()
     {
-
+        setConfigValue(true,"oneInstance");
     }
 
     //region G/S
@@ -19,7 +19,11 @@ public class Config {
 
     public void setConfigValue(Object val,String configName)
     {
-
+        switch (configName)
+        {
+            case "oneInstance":
+                this.oneInstance = val;
+        }
         return;
     }
     //endregion
