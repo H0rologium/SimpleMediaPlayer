@@ -1,6 +1,5 @@
 package horo.smp.main;
 import horo.smp.config.Log;
-import horo.smp.controller.PlayerController;
 import horo.smp.view.PlayerWindow;
 import horo.smp.view.SettingsWindow;
 import horo.smp.config.Config;
@@ -8,7 +7,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
