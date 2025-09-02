@@ -10,9 +10,12 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -38,6 +41,15 @@ public class PlayerController {
     private Slider progressSlider;
 
     @FXML
+    private VBox playerControlsVbox;
+
+    private String GetFormattedTime(double time)
+    {
+        int tk = (int)time;
+        return ((tk/3600 > 9) ? "" : "0")+tk/3600+":"+((tk%3600/60 > 9) ? "" : "0")+tk%3600/60+":"+((tk%60 > 9) ? "" : "0")+tk%60;
+    }
+
+    @FXML
     public void initialize() {
         Log.Information(this,"Media player opening with supplied path: "+Main.inputFile.getAbsolutePath());
         this.media = new Media(Main.inputFile.toURI().toString());
@@ -46,7 +58,7 @@ public class PlayerController {
 
         AddListeners();
         //Can't run bindings before FXML has been injected
-        Platform.runLater(() -> BindPlayer());
+        Platform.runLater(this::BindPlayer);
 
         //this.mediaPlayer.setAutoPlay(true);
         this.mediaPlayer.play();
@@ -57,23 +69,45 @@ public class PlayerController {
     {
         this.mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
             this.progressSlider.setValue(newValue.toSeconds());
-            this.durationlbl.setText("%X".formatted((int)this.progressSlider.getValue()));
+            this.durationlbl.setText(GetFormattedTime(this.progressSlider.getValue()));
         });
         this.mediaPlayer.setOnReady(() -> {
             Duration d = this.media.getDuration();
             this.progressSlider.setMax(d.toSeconds());
             this.progressSlider.setValue(0);
         });
-        return;
+        this.progressSlider.valueChangingProperty().addListener((observable, oldValue, newValue) -> {
+           if (!newValue)
+           {
+               this.mediaPlayer.seek(Duration.seconds(this.progressSlider.getValue()));
+               this.mediaPlayer.play();
+           }
+           else
+           {
+               this.mediaPlayer.pause();
+           }
+        });
     }
 
     private void BindPlayer()
     {
-        Scene player = this.videoView.getScene();
+        Scene playerScene = this.videoView.getScene();
+        Stage stage = (Stage) playerScene.getWindow();
 
-        this.videoView.fitHeightProperty().bind(player.heightProperty());
-        this.videoView.fitWidthProperty().bind(player.widthProperty());
-        return;
+        this.videoView.setPreserveRatio(true);
+        VBox.setVgrow(this.videoView, Priority.ALWAYS);
+        this.videoView.fitWidthProperty().bind(this.playerRootPane.widthProperty());
+        this.videoView.fitHeightProperty().bind(
+                this.playerRootPane.heightProperty().subtract(this.playerControlsVbox.heightProperty())
+        );
+        this.playerRootPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            double minHeight = this.mediaPlayer.getMedia().getHeight() + this.playerControlsVbox.getHeight();
+            stage.setMinHeight(minHeight);
+        });
+        this.playerRootPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+            double minWidth = this.mediaPlayer.getMedia().getWidth();
+            stage.setMinWidth(minWidth);
+        });
     }
 
     //region Events
@@ -92,7 +126,7 @@ public class PlayerController {
 
     @FXML
     void onDurationSliderPressed(MouseEvent event) {
-        this.mediaPlayer.seek(Duration.seconds(progressSlider.getValue()));
+        this.mediaPlayer.seek(Duration.seconds(this.progressSlider.getValue()));
     }
     //endregion
 }
