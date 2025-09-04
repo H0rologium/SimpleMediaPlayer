@@ -101,7 +101,7 @@ public class PlayerController {
                 this.playerRootPane.heightProperty().subtract(this.playerControlsVbox.heightProperty())
         );
         this.playerRootPane.heightProperty().addListener((obs, oldVal, newVal) -> {
-            double minHeight = this.mediaPlayer.getMedia().getHeight() + this.playerControlsVbox.getHeight();
+            double minHeight = (this.mediaPlayer.getMedia().getHeight()*0.2) + this.playerControlsVbox.getHeight();
             stage.setMinHeight(minHeight);
         });
         this.playerRootPane.widthProperty().addListener((obs, oldVal, newVal) -> {

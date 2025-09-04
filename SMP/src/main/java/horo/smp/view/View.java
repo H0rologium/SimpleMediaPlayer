@@ -14,6 +14,7 @@ public abstract class View extends Application {
     private String resourceName;
     private String title;
     private Image icon;
+    private int windowTypeID;
 
     public void setResourceName(String resourceName) {
         this.resourceName = resourceName;
@@ -23,6 +24,9 @@ public abstract class View extends Application {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+    public void  setWindowTypeID(int windowTypeID) {
+        this.windowTypeID = windowTypeID;
     }
 
     public static void launchApp() {
@@ -36,8 +40,10 @@ public abstract class View extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/"+this.resourceName));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+
             primaryStage.setTitle(this.title);
             primaryStage.setScene(scene);
+            primaryStage.getScene().getStylesheets().add(getClass().getResource(getWindowStyleSheet(this.windowTypeID)).toExternalForm());
             primaryStage.setResizable(true);
             primaryStage.getIcons().add(this.icon);
             primaryStage.show();
@@ -45,5 +51,27 @@ public abstract class View extends Application {
         } catch (Exception e) {
             Log.Fatal(this,e.toString());
         }
+    }
+
+    private String getWindowStyleSheet(int windowID)
+    {
+        String retPath;
+        switch(windowID)
+        {
+            case 0:
+                retPath = "settings_style.css";
+                break;
+            case 1:
+                retPath = "mediaplayer_style.css";
+                break;
+            case 2:
+                retPath = "imageview_style.css";
+                break;
+            default:
+                retPath = "blank.css";
+                break;
+        }
+
+        return "/"+retPath;
     }
 }

@@ -5,6 +5,7 @@ public class PlayerWindow extends View {
 
     public PlayerWindow()
     {
+        this.setWindowTypeID(1);
         this.setResourceName("fxml_media.fxml");
         this.setWindowIcon("icon");
         this.setTitle(title);

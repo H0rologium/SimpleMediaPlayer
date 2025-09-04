@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Main extends Application {
@@ -25,7 +26,7 @@ public class Main extends Application {
             launch();
             return;
         }
-        File f = new File(clArgs.get(0));
+        File f = new File(Paths.get(clArgs.get(0)).toAbsolutePath().toUri());
         if (!f.canRead()) {
             Log.Error(null,"Can't read file: " + f.getPath());
             return;

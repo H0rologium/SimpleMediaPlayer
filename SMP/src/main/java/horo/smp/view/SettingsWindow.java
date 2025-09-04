@@ -6,6 +6,7 @@ public class SettingsWindow extends View
 
     public SettingsWindow()
     {
+        this.setWindowTypeID(0);
         this.setResourceName("fxml_settings.fxml");
         this.setWindowIcon("icon");
         this.setTitle(title);
