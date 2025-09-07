@@ -1,4 +1,48 @@
-#playButton
+.root
 {
+    -fx-background-color: #15191D;
+}
 
+.durationCtrl
+{
+    -fx-text-fill:#A7C7E5;
+}
+
+.controlbarBtn
+{
+    -fx-font: bold 14pt "Arial";
+    -fx-background-color: #647789;
+}
+
+#loopBtn
+{
+    -fx-font: bold 14pt "Calibri";
+}
+
+#loopBtn:selected
+{
+    -fx-background-radius:10;
+    -fx-background-color: #DFB951;
+}
+
+#fullscreenBtn
+{
+    -fx-font: bold 14pt "Calibri";
+}
+
+#fullscreenBtn:selected
+{
+    -fx-background-radius:10;
+    -fx-background-color: #DFB951;
+}
+#mediaSettingsBtn
+{
+    -fx-font: bold 14pt "Calibri";
+    -fx-background-color: #647789;
+}
+#volumeSlider  .track
+{
+  -fx-background-color: #444;
+  -fx-pref-height: 6px;
+  -fx-background-radius: 3px;
 }

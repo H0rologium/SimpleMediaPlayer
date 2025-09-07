@@ -1,13 +1,13 @@
 package horo.smp.view;
 import horo.smp.config.Log;
-import horo.smp.controller.PlayerController;
-import horo.smp.controller.SettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+
+import static horo.smp.main.Main.getConfig;
 
 public abstract class View extends Application {
 
@@ -46,6 +46,14 @@ public abstract class View extends Application {
             primaryStage.getScene().getStylesheets().add(getClass().getResource(getWindowStyleSheet(this.windowTypeID)).toExternalForm());
             primaryStage.setResizable(true);
             primaryStage.getIcons().add(this.icon);
+
+            primaryStage.setOnCloseRequest(event -> {
+                if (!primaryStage.isFullScreen()) getConfig().setConfigValue(new double[]{primaryStage.getWidth(),primaryStage.getHeight()},"lastWindowDimension");
+                getConfig().saveConfig();
+            });
+
+            //primaryStage.getScene().getWindow().setWidth(getConfig().getWinDimensions()[0]);
+            //primaryStage.getScene().getWindow().setHeight(getConfig().getWinDimensions()[1]);
             primaryStage.show();
 
         } catch (Exception e) {
@@ -62,10 +70,8 @@ public abstract class View extends Application {
                 retPath = "settings_style.css";
                 break;
             case 1:
-                retPath = "mediaplayer_style.css";
-                break;
             case 2:
-                retPath = "imageview_style.css";
+                retPath = "mediaplayer_style.css";
                 break;
             default:
                 retPath = "blank.css";
