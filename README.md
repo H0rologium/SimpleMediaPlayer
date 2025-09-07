@@ -10,7 +10,7 @@ Should run fine on both windows 10 and 11. I only own windows 10 computers at th
 
 ### Usage
 
-You can find a latest release for the installer from the releases page to fit your needs. Its an offline installer and will install the program under Program Files.
+You can find a latest release for the installer [from the releases page](https://github.com/H0rologium/SimpleMediaPlayer/releases) to fit your needs. Its an offline installer and will install the program under Program Files.
 
 You set this as the default application for file extension of choice by right clicking a file with a desired extension and going to Open With -> Choose Another App (Win10) and browsing to the executable of this program to do so, and letting windows handle it from there. I'm not currently planning on adding regsitry functionality to do this automatically.
 
