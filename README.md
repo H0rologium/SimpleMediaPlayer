@@ -7,6 +7,8 @@ This is a lightweight media program written in java 24. The purpose is mainly to
 
 Should run fine on both windows 10 and 11. I only own windows 10 computers at the moment so feel free to report any win11 issues. 
 
+![a screenshot of the media player](preview.png)
+
 
 ### Usage
 
